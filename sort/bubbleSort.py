@@ -10,13 +10,18 @@
 def bubbleSort(myList):
     length = len(myList)
     for i in range(length):
-        for j in range(length - i - 1):
-            # 从小到大是>
-            # 从大到小是<
-            if myList[j] > myList[j + 1]:
-                temp = myList[j + 1]
-                myList[j + 1] = myList[j]
-                myList[j] = temp
+        # for j in range(length - i - 1):
+        #     # 从小到大是>
+        #     # 从大到小是<
+        #     if myList[j] > myList[j + 1]:
+        #         temp = myList[j + 1]
+        #         myList[j + 1] = myList[j]
+        #         myList[j] = temp
+
+        for j in range(i + 1, length):
+            if myList[i] > myList[j]:
+                myList[i], myList[j] = myList[j], myList[i]
+
     return myList
 
 myList = [49,38,65,97,76,13,27,49]
