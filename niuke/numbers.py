@@ -98,6 +98,22 @@
 #         result.append(num)
 #     for i in range(len(result)):
 #         print(result[i])
+# ==========================================
+# 股票价格
+# import sys
+# if __name__ == '__main__':
+#     t = sys.stdin.readline().strip().split()
+#     num = []
+#     result = []
+#     for i in range(len(t)):
+#         number = 0
+#         for j in range(i + 1):
+#             number = number + int(t[j])
+#         num.append(number)
+#         sum = int(t[i]) * (i + 1)
+#         result.append(sum)
+#     print(num)
+#     print(result)
 
 
 
