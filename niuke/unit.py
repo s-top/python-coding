@@ -218,3 +218,52 @@ public class Main {
         return false;
     }
 }
+
+=================================
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+public class IsFormal {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		for(int i = 0;i<T;i++) {
+			int N = sc.nextInt();
+			int M = sc.nextInt();
+			int [][] arr = new int[N][N];
+			for(int j = 0;j<M;j++) {
+				int node1 = sc.nextInt();
+				int node2 = sc.nextInt();
+				arr[node1-1][node2-1] = 1;
+				arr[node2-1][node1-1] = 1;
+			}
+			if(isFormal(arr)) {
+				System.out.println("Yes");
+			}else {
+				System.out.println("No");
+			}
+		}
+	}
+
+	private static boolean isFormal(int[][] arr) {
+		Set<List<Integer>> set = new HashSet<>();
+		for(int i = 0;i<arr.length;i++) {
+			List<Integer> list = new ArrayList<>();
+			for(int j = 0;j<arr.length;j++) {
+				if(arr[i][j] == 0) {
+					list.add(j);
+				}
+			}
+			set.add(list);
+		}
+		int sum =0;
+		for (List<Integer> list: set) {
+			sum += list.size();
+		}
+		return sum == arr.length;
+	}
+}
