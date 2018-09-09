@@ -184,3 +184,37 @@
 #         s = s + getNum(data, i, 0)
 #
 #     print(s)
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        int n = scan.nextInt();
+        List<int[]> numList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int[] num = new int[3];
+            num[0] = scan.nextInt();
+            num[1] = scan.nextInt();
+            num[2] = scan.nextInt();
+            numList.add(num);
+        }
+        int count=0;
+        for (int i = 0; i < n; i++) {
+            int[] tmp = numList.get(i);
+            for (int j = 0; j < n; j++) {
+                if(compareThem(tmp,numList.get(j))){
+                    count++;
+                    break;
+                }
+            }
+        }
+        System.out.println(count);
+    }
+
+    private static boolean compareThem(int[] tmp, int[] ints) {
+        if(tmp[0]<ints[0] && tmp[1]<ints[1] && tmp[2]<ints[2])
+            return true;
+        return false;
+    }
+}
