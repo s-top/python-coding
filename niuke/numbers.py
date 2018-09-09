@@ -114,8 +114,57 @@
 #         result.append(sum)
 #     print(num)
 #     print(result)
+# =====================================================
 
+# !usr/bin/env python
+# encoding:utf-8
 
-
-
-
+# import re
+# import sys
+# def judge_legal_ip(one_str):
+#     compile_ip = re.compile('^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$')
+#     if compile_ip.match(one_str):
+#         return True
+#     else:
+#         return False
+# def judge_legal_ip2(one_str):
+#     if '.' not in one_str:
+#         return False
+#     elif one_str.count('.') != 3:
+#         return False
+#     else:
+#         flag = True
+#         one_list = one_str.split('.')
+#         for one in one_list:
+#             try:
+#                 one_num = int(one)
+#                 if one_num >= 0 and one_num <= 255:
+#                     pass
+#                 else:
+#                     flag = False
+#             except:
+#                 flag = False
+#         return flag
+#
+# ip_str = sys.stdin.readline().strip()
+# print(judge_legal_ip(ip_str))
+import sys
+data = sys.stdin.readline().strip().split("=")
+print(data)
+n = data[1]
+array = []
+for i in range(n):
+    if i == 0:
+        array.append(0)
+    else:
+        array.append(2 * i - 1)
+sum = 0
+for i in range(len(array)):
+    flag = 0
+    for j in range(2, array[i]):
+        if array[i] % j == 0:
+            flag = 1
+            break
+    if flag == 0:
+        sum = sum + array[i]
+print(sum)
