@@ -184,37 +184,58 @@
 #         s = s + getNum(data, i, 0)
 #
 #     print(s)
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-public class Main {
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        int n = scan.nextInt();
-        List<int[]> numList = new ArrayList<>();
-        for (int i = 0; i < n; i++) {
-            int[] num = new int[3];
-            num[0] = scan.nextInt();
-            num[1] = scan.nextInt();
-            num[2] = scan.nextInt();
-            numList.add(num);
-        }
-        int count=0;
-        for (int i = 0; i < n; i++) {
-            int[] tmp = numList.get(i);
-            for (int j = 0; j < n; j++) {
-                if(compareThem(tmp,numList.get(j))){
-                    count++;
-                    break;
-                }
-            }
-        }
-        System.out.println(count);
-    }
 
-    private static boolean compareThem(int[] tmp, int[] ints) {
-        if(tmp[0]<ints[0] && tmp[1]<ints[1] && tmp[2]<ints[2])
-            return true;
-        return false;
-    }
-}
+import sys
+
+# 7 2
+# 1 2 3 -2 3 -10 3
+
+def getMax(num_list):
+    length = len(num_list)
+    max_value = -10000000000
+    tmp = 0
+    p = 0
+    q = 0
+    t = []
+    for i in range(length):
+        if tmp + num_list[i] < num_list[i]:
+            p = i
+            q = 1
+        else:
+            q += 1
+        tmp = max(tmp + num_list[i], num_list[i])
+        max_value = max(max_value, tmp)
+        if tmp == max_value:
+            t.append((p, (p + q)))
+    return max_value, t[-1]
+if __name__ == '__main__':
+    num = sys.stdin.readline().strip().split()
+    a = int(num[0])
+    b = int(num[1])
+    content = sys.stdin.readline().strip().split()
+    data = []
+    for i in range(len(content)):
+        data.append(int(content[i]))
+    indexList = []
+    for j in range(len(data)):
+        if data[j] < 0:
+            indexList.append(j)
+    result1 = 0
+    a = []
+    for k in range(len(indexList)):
+        b = 0
+        for j in range(0,indexList[k]):
+            b = b + data[j]
+        a.append(b)
+        # for j in range(0, indexList[k]):
+
+
+    result = 0
+
+    for i in range(b):
+        dataMax, index = getMax(data)
+        result = result + dataMax
+        if index[1] < len(data):
+            data = data[index[1]:]
+
+
