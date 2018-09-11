@@ -238,7 +238,6 @@
 #         if index[1] < len(data):
 #             data = data[index[1]:]
 
-#导入math包
 import math
 import sys
 #定义点的函数
