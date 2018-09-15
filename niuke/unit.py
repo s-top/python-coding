@@ -237,57 +237,119 @@
 #         result = result + dataMax
 #         if index[1] < len(data):
 #             data = data[index[1]:]
+#
+# import math
+# import sys
+# #定义点的函数
+# class Point:
+#     def __init__(self, x=0, y=0):
+#         self.x=x
+#         self.y=y
+#     def getx(self):
+#         return self.x
+#     def gety(self):
+#         return self.y
+#     def setx(self, value):
+#         self.x = value
+#     def sety(self, value):
+#         self.y = value
+# #定义直线函数
+# class Getlen:
+#     def __init__(self,p1,p2):
+#         self.x = p1.getx()-p2.getx()
+#         self.y = p1.gety()-p2.gety()
+#         #用math.sqrt（）求平方根
+#         self.len = math.sqrt((self.x**2)+(self.y**2))
+#     #定义得到直线长度的函数
+#     def getlen(self):
+#         return self.len
+#
+# # 2 -1 0 5 3
+# # 0 2
+# # 5 2
+#
+# if __name__ == '__main__':
+#     num = sys.stdin.readline().strip().split()
+#     n = int(num[0])
+#     p1 = Point(int(num[1]), int(num[2]))
+#     p2 = Point(int(num[3]), int(num[4]))
+#     data = []
+#     resultList1 = []
+#     resultList2 = []
+#     r1 = 0
+#     r2 = 0
+#     for i in range(n):
+#         content = sys.stdin.readline().strip().split()
+#         # data.append((int(content[0]),int(content[1])))
+#         p = Point(int(content[0]),int(content[1]))
+#         if Getlen(p, p1).len <= Getlen(p, p2).len:
+#             resultList1.append(Getlen(p, p1).len)
+#         else:
+#             resultList2.append(Getlen(p, p2).len)
+#
+#     r1 = max(resultList1)
+#     r2 = max(resultList2)
+#     print(int((r1**2)+(r2**2)))
 
-import math
+# def sort_(l):
+#     if len(l) <= 1:
+#         return l
+#     mid = l[0]
+#     low = [item for item in l if item < mid]
+#     high = [item for item in l if item > mid]
+#     return sort_(low) + [mid] + sort_(high)
+# import sys
+# if __name__ == '__main__':
+#     # 10, 1, 3, 5, 5, 8
+#     num = sys.stdin.readline().strip().split(", ")
+#     numList = []
+#     for i in range(len(num)):
+#         numList.append(int(num[i]))
+#     result = sort_(numList)
+#     res = str(result[0])
+#     for i in range(1, len(result)):
+#         res = res + "," + str(result[i])
+#     print(res)
+
+# 快速排序思想
+def getRes_QuickSort(nums, target):
+    nums = sorted(nums)
+    len1 = len(nums)
+    res = []
+    if len1 >= 2:
+        low, high = 0, len1 - 1
+        while low < high:
+            if nums[low] + nums[high] == target:
+                res.append((nums[low], nums[high]))
+                low += 1
+                high -= 1
+            elif nums[low] + nums[high] > target:
+                high -= 1
+            else:
+                low += 1
+        return res
+
 import sys
-#定义点的函数
-class Point:
-    def __init__(self, x=0, y=0):
-        self.x=x
-        self.y=y
-    def getx(self):
-        return self.x
-    def gety(self):
-        return self.y
-    def setx(self, value):
-        self.x = value
-    def sety(self, value):
-        self.y = value
-#定义直线函数
-class Getlen:
-    def __init__(self,p1,p2):
-        self.x = p1.getx()-p2.getx()
-        self.y = p1.gety()-p2.gety()
-        #用math.sqrt（）求平方根
-        self.len = math.sqrt((self.x**2)+(self.y**2))
-    #定义得到直线长度的函数
-    def getlen(self):
-        return self.len
-
-# 2 -1 0 5 3
-# 0 2
-# 5 2
-
-if __name__ == '__main__':
-    num = sys.stdin.readline().strip().split()
-    n = int(num[0])
-    p1 = Point(int(num[1]), int(num[2]))
-    p2 = Point(int(num[3]), int(num[4]))
-    data = []
-    resultList1 = []
-    resultList2 = []
-    r1 = 0
-    r2 = 0
-    for i in range(n):
-        content = sys.stdin.readline().strip().split()
-        # data.append((int(content[0]),int(content[1])))
-        p = Point(int(content[0]),int(content[1]))
-        if Getlen(p, p1).len <= Getlen(p, p2).len:
-            resultList1.append(Getlen(p, p1).len)
-        else:
-            resultList2.append(Getlen(p, p2).len)
-
-    r1 = max(resultList1)
-    r2 = max(resultList2)
-    print(int((r1**2)+(r2**2)))
-
+if __name__ == "__main__":
+    data = sys.stdin.readline().strip().split("|")
+    nums = data[0].split(",")
+    dataNums = []
+    for i in range(len(nums)):
+        dataNums.append(int(nums[i]))
+    target = int(data[1])
+    result = (getRes_QuickSort(dataNums, target))
+    n = 0
+    print(dataNums)
+    for i in range(len(dataNums)):
+        if 2 * dataNums[i] == target:
+            print(dataNums[i])
+            n = n + 1
+            print(n)
+    print(result)
+    if result == []:
+        print(n)
+    else:
+        a = 0
+        for i in result:
+            a = a + 1
+        print(a + n)
