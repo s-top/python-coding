@@ -312,44 +312,75 @@
 #     print(res)
 
 # 快速排序思想
-def getRes_QuickSort(nums, target):
-    nums = sorted(nums)
-    len1 = len(nums)
-    res = []
-    if len1 >= 2:
-        low, high = 0, len1 - 1
-        while low < high:
-            if nums[low] + nums[high] == target:
-                res.append((nums[low], nums[high]))
-                low += 1
-                high -= 1
-            elif nums[low] + nums[high] > target:
-                high -= 1
-            else:
-                low += 1
-        return res
+# def getRes_QuickSort(nums, target):
+#     nums = sorted(nums)
+#     len1 = len(nums)
+#     res = []
+#     if len1 >= 2:
+#         low, high = 0, len1 - 1
+#         while low < high:
+#             if nums[low] + nums[high] == target:
+#                 res.append((nums[low], nums[high]))
+#                 low += 1
+#                 high -= 1
+#             elif nums[low] + nums[high] > target:
+#                 high -= 1
+#             else:
+#                 low += 1
+#         return res
+
+# def gcd(a,b):
+#     while b != 0:
+#         r = b
+#         b = a % b
+#         a = r
+#     return a
+# import sys
+# if __name__ == "__main__":
+#     n = int(input())
+#     result = []
+#     for i in range(n):
+#         data = sys.stdin.readline().strip().split()
+#         a = int(data[0])
+#         b = int(data[1])
+#         c = int(data[2])
+#
+#         if c % gcd(a, b) == 0:
+#             result.append("YES")
+#         else:
+#             result.append("NO")
+#     for i in range(len(result)):
+#         print(result[i])
+
+def single_list(arr, target):
+    return arr.count(target)
 
 import sys
 if __name__ == "__main__":
-    data = sys.stdin.readline().strip().split("|")
-    nums = data[0].split(",")
-    dataNums = []
-    for i in range(len(nums)):
-        dataNums.append(int(nums[i]))
-    target = int(data[1])
-    result = (getRes_QuickSort(dataNums, target))
-    n = 0
-    print(dataNums)
-    for i in range(len(dataNums)):
-        if 2 * dataNums[i] == target:
-            print(dataNums[i])
-            n = n + 1
-            print(n)
+    num = sys.stdin.readline().strip().split()
+    arr = []
+    for i in range(int(num[0])):
+        arr.append(i+1)
+    n = int(int(num[1]))
+    x = []
+    y = []
+    for i in range(n):
+        data = sys.stdin.readline().strip().split()
+        x.append(int(data[0]))
+        y.append(int(data[1]))
+    datax = {}
+    datay = {}
+    for i in range(len(arr)):
+        for j in range(len(x)):
+            if x[j] == arr[i]:
+                datax[arr[i]] = single_list(arr, x[j])
+        for k in range(len(y)):
+            if y[k] == arr[i]:
+                datay[arr[i]] = single_list(arr, x[k])
+    result = 0
+    for key in datax:
+        for k in datay:
+            if k == key:
+                if datax[key] > datax[k]:
+                    result = result + 1
     print(result)
-    if result == []:
-        print(n)
-    else:
-        a = 0
-        for i in result:
-            a = a + 1
-        print(a + n)
