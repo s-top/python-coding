@@ -352,35 +352,146 @@
 #     for i in range(len(result)):
 #         print(result[i])
 
-def single_list(arr, target):
-    return arr.count(target)
+# def single_list(arr, target):
+#     return arr.count(target)
+#
+# import sys
+# if __name__ == "__main__":
+#     num = sys.stdin.readline().strip().split()
+#     arr = []
+#     for i in range(int(num[0])):
+#         arr.append(i+1)
+#     n = int(int(num[1]))
+#     x = []
+#     y = []
+#     for i in range(n):
+#         data = sys.stdin.readline().strip().split()
+#         x.append(int(data[0]))
+#         y.append(int(data[1]))
+#     datax = {}
+#     datay = {}
+#     for i in range(len(arr)):
+#         for j in range(len(x)):
+#             if x[j] == arr[i]:
+#                 datax[arr[i]] = single_list(arr, x[j])
+#         for k in range(len(y)):
+#             if y[k] == arr[i]:
+#                 datay[arr[i]] = single_list(arr, x[k])
+#     result = 0
+#     for key in datax:
+#         for k in datay:
+#             if k == key:
+#                 if datax[key] > datay[k]:
+#                     result = result + 1
+#     print(result)
 
-import sys
+# def getResult(a,b):
+#     if a % b == 0:
+#         return "YES"
+#     else:
+#         return "NO"
+# def addSum(num):
+#     return sum(int(i) for i in str(num) if i.isdigit())
+# if __name__ == "__main__":
+#     n = int(input())
+#     result = []
+#     for i in range(n):
+#         data = int(input())
+#         result.append(getResult(data, addSum(data)))
+#     for i in range(len(result)):
+#         print(result[i])
+
+# def get_val(x,i,has,val):
+#     if i > len(x) - 1:
+#         return
+#     if has + list[i] == val:
+#         #符合条件记录
+#         x[i] = 1
+#         print(x)
+#         x[i] = 0
+#     # 当前位置取 执行一次
+#     x[i] = 1
+#     get_val(x,i+1,has+list[i])
+#     # 当前位置不取 执行一次
+#     x[i] = 0
+#     get_val(x, i + 1, has)
+#
+# def addSum(num):
+#     return sum(int(i) for i in str(num) if i.isdigit())
+# import sys
+# if __name__ == "__main__":
+#     n = int(input())
+#     num = sys.stdin.readline().strip().split()
+#     result = []
+#     for i in range(len(num)):
+#         result.append(int(num[i]))
+#     temp = []
+#     for i in range(len(result)):
+#         for j in range(i, len(result)):
+#             if i != j:
+#                 if addSum(result[i: j]) == 1:
+#                     temp.append(result[i: j])
+#     print(temp)
+#     index = ''.join(str(i) for i in result)
+#     s = 0
+
+# def anyToDecimal(num,n):
+#    baseStr = {"0":0,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,
+#               "a":10,"b":11,"c":12,"d":13,"e":14,"f":15,"g":16,"h":17,"i":18,"j":19}
+#    new_num = 0
+#    nNum = len(num) - 1
+#    for i in num:
+#        new_num = new_num  + baseStr[i]*pow(n,nNum)
+#        nNum = nNum -1
+#    return new_num
+# if __name__ == "__main__":
+#     data = []
+#     result = []
+#     index = []
+#     while 1:
+#         num = input().strip()
+#         result.append(num)
+#         if num != "END":
+#             n = int(num.split("#")[0])
+#             m = num.split("#")[1]
+#             data.append(anyToDecimal(m, n))
+#         else:
+#             break
+#     for i in range(len(data)):
+#         s = 0
+#         for j in range(len(data)):
+#             if i != j and data[i] != data[j]:
+#                 s = s + 1
+#         if s == len(data) - 1:
+#             index.append(i)
+#     if len(index) == 0:
+#         print("None")
+#     else:
+#         for i in range(len(index)):
+#             print(result[index[i]])
+
 if __name__ == "__main__":
-    num = sys.stdin.readline().strip().split()
-    arr = []
-    for i in range(int(num[0])):
-        arr.append(i+1)
-    n = int(int(num[1]))
-    x = []
-    y = []
+    n = int(input())
+    data = []
     for i in range(n):
-        data = sys.stdin.readline().strip().split()
-        x.append(int(data[0]))
-        y.append(int(data[1]))
-    datax = {}
-    datay = {}
-    for i in range(len(arr)):
-        for j in range(len(x)):
-            if x[j] == arr[i]:
-                datax[arr[i]] = single_list(arr, x[j])
-        for k in range(len(y)):
-            if y[k] == arr[i]:
-                datay[arr[i]] = single_list(arr, x[k])
-    result = 0
-    for key in datax:
-        for k in datay:
-            if k == key:
-                if datax[key] > datax[k]:
-                    result = result + 1
-    print(result)
+        data.append(int(input()))
+    m = int(input())
+    result = []
+    for i in range(len(data)):
+        temp = []
+        for j in range(len(data)):
+            temp.append(data[j])
+        temp[i] = temp[i] + m
+        maxValue = 0
+        for i in range(len(temp)):
+            for j in range(len(temp)):
+                value1 = temp[i]
+                value2 = temp[j]
+                if value1 >= value2:
+                    h = value2
+                    w = abs(i - j)
+                    s = h*w
+                    if s > maxValue:
+                        maxValue = s
+        result.append(maxValue)
+    print(max(result))
